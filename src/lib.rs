@@ -80,7 +80,7 @@ use tracing_subscriber::{prelude::*, registry::Registry, EnvFilter};
 /// This plugin should not be added multiple times in the same process. This plugin
 /// sets up global logging configuration for **all** Apps in a given process, and
 /// rerunning the same initialization multiple times will lead to a panic.
-pub struct LogPlugin {
+pub struct LogFuPlugin {
     /// Filters logs using the [`EnvFilter`] format
     pub filter: String,
 
@@ -91,7 +91,7 @@ pub struct LogPlugin {
     pub log_too_file: bool,
 }
 
-impl Default for LogPlugin {
+impl Default for LogFuPlugin {
     fn default() -> Self {
         Self {
             filter: "wgpu=error,naga=warn".to_string(),
@@ -100,7 +100,7 @@ impl Default for LogPlugin {
         }
     }
 }
-impl Plugin for LogPlugin {
+impl Plugin for LogFuPlugin {
     //# cant move bits of this into separate functions
     //# because i don't understand the borrowing rules
     //# neither does rust-analyzer apparently
